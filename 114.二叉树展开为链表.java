@@ -22,11 +22,34 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-
+        if (root == null) {
+            return;
+        }
+        dfs(root);
     }
 
     private TreeNode dfs(TreeNode node) {
+        if (node.left == null && node.right == null) {
+            return node;
+        }
 
+        TreeNode lastLeft = node.left;
+        if (lastLeft != null) {
+            lastLeft = dfs(node.left);
+        }
+
+        TreeNode lastRight = node.right;
+        if (lastRight != null) {
+            lastRight = dfs(node.right);
+        }
+
+        if (lastLeft != null) {
+            lastLeft.right = node.right;
+        }
+        node.right = node.left != null ? node.left : node.right;
+        node.left = null;
+
+        return lastRight == null ? lastLeft : lastRight;
     }
 }
 // @lc code=end
