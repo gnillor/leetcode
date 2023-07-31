@@ -9,7 +9,7 @@ class Solution {
     public int findKthLargest(int[] nums, int k) {
         int heapSize = nums.length;
         buildMaxHeap(nums, heapSize);
-        for (int i = 0; i < k - 1; i++) {
+        for (int i = k; i > 1; i--) {
             swap(nums, 0, --heapSize);
             maxHeapify(nums, 0, heapSize);
         }
@@ -18,7 +18,7 @@ class Solution {
     }
 
     public void buildMaxHeap(int[] nums, int heapSize) {
-        for (int i = heapSize / 2 - 1; i >= 0; i--) {
+        for (int i = (heapSize - 1) / 2; i >= 0; i--) {
             maxHeapify(nums, i, heapSize);
         }
     }
