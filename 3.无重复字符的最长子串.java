@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 /*
@@ -16,7 +17,6 @@ class Solution {
 
         int maxLen = 0, left = 0, right = 0;
         Set<Character> letterSet = new HashSet<>();
-
         while (right < s.length()) {
             if (!letterSet.contains(s.charAt(right))) {
                 letterSet.add(s.charAt(right++));
@@ -30,4 +30,3 @@ class Solution {
     }
 }
 // @lc code=end
-
