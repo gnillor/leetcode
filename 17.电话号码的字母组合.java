@@ -6,32 +6,31 @@
 
 // @lc code=start
 class Solution {
-    private List<String> letterList = new ArrayList();
-    private StringBuilder letterBuilder = new StringBuilder();
-    private String[] phoneLetters = new String[]{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    private List<String> combineList = new ArrayList();
+    private StringBuilder combineBuilder = new StringBuilder();
+    private String[] phoneLetters = new String[] { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
 
     public List<String> letterCombinations(String digits) {
-        if (digits.length() == 0) {
-            return letterList;
+        if (digits == null || digits.length() == 0) {
+            return combineList;
         }
 
         backtrack(digits, 0);
-        return letterList;
+        return combineList;
     }
 
     private void backtrack(String digits, int idx) {
-        if (idx == digits.length()) {
-            letterList.add(letterBuilder.toString());
+        if (combineBuilder.length() == digits.length()) {
+            combineList.add(combineBuilder.toString());
             return;
         }
 
-        String letters = phoneLetters[digits.charAt(idx) - '0'];
-        for (int i = 0; i < letters.length(); i++) {
-            letterBuilder.append(letters.charAt(i));
+        String letter = phoneLetters[digits.charAt(idx) - '0'];
+        for (int i = 0; i < letter.length(); i++) {
+            combineBuilder.append(letter.charAt(i));
             backtrack(digits, idx + 1);
-            letterBuilder.deleteCharAt(idx);
+            combineBuilder.deleteCharAt(idx);
         }
     }
 }
 // @lc code=end
-
