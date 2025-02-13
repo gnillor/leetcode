@@ -5,27 +5,29 @@
  */
 
 // @lc code=start
+
+import java.util.Map;
+
 class Solution {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
-        Map<Character, Character> charMap = new HashMap<>(3);
-        charMap.put(')', '(');
-        charMap.put(']', '[');
-        charMap.put('}', '{');
+        Map<Character, Character> signalMap = new HashMap<>();
+        signalMap.put(')', '(');
+        signalMap.put('}', '{');
+        signalMap.put(']', '[');
 
         for (int i = 0; i < s.length(); i++) {
-            char letter = s.charAt(i);
-            if (charMap.containsKey(letter)) {
-                if (stack.size() == 0 || stack.pop() != charMap.get(letter)) {
+            if (signalMap.containsKey(s.charAt(i))) {
+                if (stack.isEmpty() || stack.pop() != signalMap.get(s.charAt(i))) {
                     return false;
                 }
+
             } else {
-                stack.push(letter);
+                stack.push(s.charAt(i));
             }
         }
 
-        return stack.size() == 0;
+        return stack.isEmpty();
     }
 }
 // @lc code=end
-
